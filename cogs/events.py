@@ -462,7 +462,7 @@ New Message
                         pass
 
         muted = await self.bot.mod_pool.fetchval("SELECT userid FROM mutes WHERE userid = $1", member.id)
-        if muted:
+        if muted and not member.bot:
             await member.guild.ban(discord.Object(id = member.id), reason = "Left whilst muted")
 
         if member.guild == self.bot.main_guild:
